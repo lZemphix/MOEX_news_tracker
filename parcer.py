@@ -15,7 +15,7 @@ def get_main_url_data(url: str, title: str = None) -> str:
     response = requests.get(url, headers=handlers)
     logging.debug(f"request url: {url}, status: {response.status_code}") #debug
     if title != None:
-        with open(f"/home/zemphix/Рабочий стол/pythonina/invest_news_parcer/{title}.html", "w", encoding="utf-8") as file:
+        with open(f"invest_news_parcer/{title}.html", "w", encoding="utf-8") as file:
             file.write(response.text)
     return response.text
     

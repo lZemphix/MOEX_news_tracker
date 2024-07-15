@@ -14,7 +14,7 @@ def main():
     while True:
         date, time, link, title, text = get_last_news()
         if title not in previous_new_title:
-            with open(f"/home/zemphix/Рабочий стол/pythonina/invest_news_parcer/{date}_{time}.md", "w") as f:
+            with open(f"invest_news_parcer/news{date}_{time}.md", "w") as f:
                 f.write(f"""# {title} 
 
 {text}
