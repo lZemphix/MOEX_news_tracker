@@ -1,33 +1,28 @@
-import parcer, time,logging
+import parser, time,logging
 
 logging.basicConfig(level=logging.DEBUG, filename="logs.log", filemode="a", format="%(asctime)s - %(levelname)s - %(message)s")
 
-def get_last_news():
-    """return date, time, title, text every 20 seconds"""
-    time.sleep(15)
-    last_new_date, last_new_time, link, last_new_title = parcer.get_last_news_base_data()
-    news_text = parcer.get_last_news_full_data()
-    return last_new_date, last_new_time, link, last_new_title, news_text
 
 def main():
-    previous_new_title = []
+    date, time_, link, title = parser.get_last_news_base_data()
+    # text = parser.get_last_news_full_data()
+    text = parser.get_full_information()
+
     while True:
-        date, time, link, title, text = get_last_news()
-        if title not in previous_new_title:
-            with open(f"invest_news_parcer/news{date}_{time}.md", "w") as f:
-                f.write(f"""# {title} 
+        with open(f"/home/zemphix/Рабочий стол/pythonina/invest_news_parser/news/{date}_{time_}.md", "w") as f:
+            f.write(f"""# {title} 
 
 {text}
 
-{date} {time}
+{date} {time_}
 
 Ссылка: https://www.moex.com{link}""")
-            previous_new_title.clear()
-        else:
-            previous_new_title.append(title)
+        time.sleep(15)  
+
 
 
 if __name__ == "__main__":
+    main()
     try:
         main()
     except Exception as e:
